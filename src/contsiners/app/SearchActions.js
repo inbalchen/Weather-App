@@ -7,7 +7,7 @@ export const getGeoposition = () => {
       dispatch({ type: "GET_GEOPOSITION_START" });
 
       // const payload = await axios.get(
-      //   `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${key}&q=32.109333%2C34.855499&language=en&details=false&toplevel=false`
+      //   `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${key}&q=32.109333%2C34.855499&language=en&details=false&toplevel=false`
       //    );
 
       const payload = "";
@@ -29,7 +29,7 @@ export const getCityLocation = (data) => {
       dispatch({ type: "GET_LOCATION_AUTOCOMPLETE_START" });
 
       const payload = await axios.get(
-        `http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${key}&q=${data}&language=en`
+        `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${key}&q=${data}&language=en`
       );
 
       dispatch({
@@ -52,7 +52,7 @@ export const getCurrentConditions = (locationKey) => {
       dispatch({ type: "GET_CURRENT_CONDITIONS_START" });
 
       const payload = await axios.get(
-        `http://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${key}&language=en&details=false&metric=true`
+        `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}?apikey=${key}&language=en&details=false&metric=true`
       );
 
       dispatch({
@@ -79,7 +79,7 @@ export const getDaylyForecasts = (locationKey, unit) => {
       }
 
       const payload = await axios.get(
-        `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${key}&language=en&details=false&metric=${metric}`
+        `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}?apikey=${key}&language=en&details=false&metric=${metric}`
       );
 
       dispatch({
@@ -104,7 +104,7 @@ export const getCurrentFavorites = (favoriteList) => {
       let favorites = [];
       for (let i in favoriteList) {
         let favorite = await axios.get(
-          `http://dataservice.accuweather.com/currentconditions/v1/${favoriteList[i].locationKey}?apikey=${key}&language=en&details=false&metric=true`
+          `https://dataservice.accuweather.com/currentconditions/v1/${favoriteList[i].locationKey}?apikey=${key}&language=en&details=false&metric=true`
         );
         favorite.cityName = favoriteList[i].chosenCity;
         favorite.locationKey = favoriteList[i].locationKey;
