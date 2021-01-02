@@ -13,6 +13,7 @@ export const Days = {
     '4': 'Thursday'
 }
 
+
 export const dayIcons = (condition) => {
     if(condition.toLowerCase().includes('rain')){
         return rain
