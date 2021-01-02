@@ -1,7 +1,13 @@
 const initState = {
   city: null,
-  fetching: false,
-  conditions: null
+  fetchingConditions: false,
+  conditions: null,
+  forecasts: null,
+  fetchingForecasts: false,
+  favoriteCities: null,
+  fetchingFavorites: false,
+  geoPosition: null,
+  fetchingGeo: false,
 };
 
 const searchReducer = (state = initState, action) => {
@@ -23,6 +29,41 @@ const searchReducer = (state = initState, action) => {
       break;
     case "GET_CURRENT_CONDITIONS_FAILURE":
       state = { ...state, conditions: action.payload, fetching: false };
+      break;
+    case "GET_DAYLY_FORECASTS_START":
+      state = { ...state, fetchingForecasts: true };
+      break;
+    case "GET_DAYLY_FORECASTS":
+      state = { ...state, forecasts: action.payload, fetchingForecasts: false };
+      break;
+    case "GET_DAYLY_FORECASTS_FAILURE":
+      state = { ...state, forecasts: action.payload, fetchingForecasts: false };
+      break;
+    case "GET_CURRENT_FAVORITES_START":
+      state = { ...state, fetchingFavorites: true };
+      break;
+    case "GET_CURRENT_FAVORITES":
+      state = {
+        ...state,
+        favoriteCities: action.payload,
+        fetchingFavorites: false,
+      };
+      break;
+    case "GET_CURRENT_FAVORITES_FAILURE":
+      state = {
+        ...state,
+        favoriteCities: action.payload,
+        fetchingFavorites: false,
+      };
+      break;
+    case "GET_GEOPOSITION_START":
+      state = { ...state, fetchingGeo: true };
+      break;
+    case "GET_GEOPOSITION":
+      state = { ...state, geoPosition: action.payload, fetchingGeo: false };
+      break;
+    case "GET_GEOPOSITION_FAILURE":
+      state = { ...state, geoPosition: action.payload, fetchingGeo: false };
       break;
     default:
       break;
