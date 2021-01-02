@@ -34,7 +34,7 @@ export const getCityLocation = (data) => {
 
       dispatch({
         type: "GET_LOCATION_AUTOCOMPLETE",
-        payload: { error: "sndlk" },
+        payload: payload,
       });
     } catch (error) {
       dispatch({
