@@ -23,7 +23,8 @@ const useStyles = makeStyles(() => createStyles({
     },
     body: {
       height: '100%',
-      width: '100%'
+      width: '100%',
+      background: 'rgba(249,249,249,.9)'
     },
     '#root': {
       height: '100%',
