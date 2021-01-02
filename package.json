@@ -2,7 +2,9 @@
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
-  "author": {"name": "Inbal Chen"},
+  "author": {
+    "name": "Inbal Chen"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
