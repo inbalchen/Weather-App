@@ -97,7 +97,7 @@ function Favorites() {
         </div>
       ) : favoriteCities && favoriteCities.error ? (
         <div>error</div>
-      ) : favoriteCities ? (
+      ) : favoriteCities && favoriteCities.length ? (
         <Grid container justify="center" alignItems="center" spacing={2}>
           {favoriteCities.map((favorite, i) => {
             return (
