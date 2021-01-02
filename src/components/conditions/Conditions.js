@@ -3,7 +3,6 @@ import { Grid, Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import celsius from "../../assets/images/celsius.svg";
-import Brightness3Icon from "@material-ui/icons/Brightness3";
 import { makeStyles } from "@material-ui/core/styles";
 import fahrenheit from "../../assets/images/fahrenheit.svg";
 
@@ -41,7 +40,6 @@ export default function Conditions(props) {
           <Typography variant="h6" gutterBottom>
             {props.chosenCity}
           </Typography>
-          <Brightness3Icon />
         </div>
       </Grid>
       <div style={{ flexGrow: "1" }} />
