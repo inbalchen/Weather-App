@@ -16,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     maxWidth: "20px",
+    height: "24px",
   },
   temp: {
-    padding: "0 8px",
+    padding: "2px 8px 0 8px",
   },
   units: {
     cursor: "pointer",
