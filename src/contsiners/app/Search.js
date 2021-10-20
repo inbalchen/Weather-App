@@ -53,7 +53,7 @@ const useStyles = makeStyles((props) => ({
     background: '#fff',
     borderRadius: '4px',
     boxShadow: "0px 2px 1px -1px rgb(0, 0, 0, 0.2), 0px 1px 1px 0px rgb(0, 0, 0, 0.14), 0px 1px 3px 0px rgb(0, 0, 0, 0.12)",
-    maxHeight: "646px",
+    maxHeight: "574px",
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -175,7 +175,7 @@ function Search() {
     await dispatch(getCityLocation(""));
     await dispatch(getCurrentConditions(locationKey));
   };
-  
+
   return (
     <div className={`${conditions && conditions.length ? classes.container + " " + conditions[0].WeatherText.toLowerCase().replace(' ', '-') : classes.container}`}>
       {fetchingConditions ? (

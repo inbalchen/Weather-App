@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "10px 0",
+    marginTop: "7px",
   },
   degree: {
-    paddingTop: "10px",
+    paddingBottom: "10px",
   },
   wrapper: {
     padding: "0 20px",
@@ -23,10 +23,8 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "20%",
   },
   itemCard: {
-    padding: "10px 3px",
     fontSize: "0.9rem",
     textAlign: "center",
-    minHeight: "315px",
     background: 'rgba(249,249,249, 0.6)',
     color: 'rgba(0, 12, 30, 0.8)',
     transition: '0.4s',
@@ -45,7 +43,6 @@ export default function Forecasts({forecasts}) {
     <Grid
       container
       justify="center"
-      alignItems="center"
       spacing={2}
       className={classes.wrapper}
     >
@@ -74,7 +71,7 @@ export default function Forecasts({forecasts}) {
                   className={classes.img}
                 />
               </div>
-              <Divider />
+              <Divider style={{margin: '10px 0'}} />
               <div className={classes.degree}>
                 {forecast.Temperature.Maximum.Value}&#176;{" "}
                 {forecast.Temperature.Maximum.Unit}
