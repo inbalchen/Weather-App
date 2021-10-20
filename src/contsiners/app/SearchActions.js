@@ -34,7 +34,7 @@ export const getCityLocation = (data) => {
 
       dispatch({
         type: "GET_LOCATION_AUTOCOMPLETE",
-        payload: payload,
+        payload: payload.data,
       });
     } catch (error) {
       dispatch({
@@ -57,7 +57,7 @@ export const getCurrentConditions = (locationKey) => {
 
       dispatch({
         type: "GET_CURRENT_CONDITIONS",
-        payload: payload,
+        payload: payload.data,
       });
     } catch (error) {
       dispatch({
@@ -84,7 +84,7 @@ export const getDaylyForecasts = (locationKey, unit) => {
 
       dispatch({
         type: "GET_DAYLY_FORECASTS",
-        payload: payload,
+        payload: payload.data,
       });
     } catch (error) {
       dispatch({

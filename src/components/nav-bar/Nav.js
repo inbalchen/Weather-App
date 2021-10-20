@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Drawer, Hidden } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
-import MenuIcon from "@material-ui/icons/Menu";
+// import { AppBar, Toolbar, Typography, Drawer, Hidden } from "@material-ui/core";
+// import { NavLink } from "react-router-dom";
+// import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   nav: {
-    background: "#073b4c",
+    background: "none",
   },
   navItem: {
     color: "#fff",
@@ -71,7 +71,7 @@ export default function NavBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.nav}>
+      {/* <AppBar position="static" className={classes.nav}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <NavLink to="/" className={classes.navIcon}>
@@ -100,9 +100,9 @@ export default function NavBar() {
             <MenuIcon className={classes.menuIcon} onClick={toggleDrawer} />
           </Hidden>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
 
-      <Drawer
+      {/* <Drawer
         anchor="left"
         open={open}
         onClose={toggleDrawer}
@@ -126,7 +126,9 @@ export default function NavBar() {
         >
           Favorites
         </NavLink>
-      </Drawer>
+      </Drawer> */}
+
+        
     </div>
   );
 }

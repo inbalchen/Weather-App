@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10px",
   },
   wrapper: {
-    padding: "20px",
+    padding: "0 20px",
   },
   wrapperItem: {
     minWidth: "20%",
@@ -26,14 +26,20 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px 3px",
     fontSize: "0.9rem",
     textAlign: "center",
-    minHeight: "250px",
+    minHeight: "315px",
+    background: 'rgba(249,249,249, 0.6)',
+    color: 'rgba(0, 12, 30, 0.8)',
+    transition: '0.4s',
+    cursor: 'pointer'
   },
   cardHeader: {
     padding: "7px 0",
+    color: 'rgba(0, 12, 30, 0.8)',
+    transition: '0.4s'
   },
 }));
 
-export default function Forecasts(props) {
+export default function Forecasts({forecasts}) {
   const classes = useStyles();
   return (
     <Grid
@@ -43,23 +49,15 @@ export default function Forecasts(props) {
       spacing={2}
       className={classes.wrapper}
     >
-      {props.forecasts.data.DailyForecasts.map((forecast, i) => {
+      {forecasts.DailyForecasts.map((forecast, i) => {
         return (
-          <Grid
-            item
-            key={i}
-            xs={12}
-            sm={4}
-            md={2}
-            lg={2}
-            className={classes.wrapperItem}
-          >
+          <Grid item key={i} xs={12} sm={6} md={4} lg={4} className={classes.wrapperItem}>
             <Card className={classes.itemCard}>
               <CardHeader
                 title={Days[i]}
-                subheader={forecast.Date.substring(0, 10)}
-                className={classes.cardHeader}
+                className={classes.cardHeader + ' card-header-anim'}
               />
+              <div>{forecast.Date.substring(0, 10)}</div>
               <div className={classes.day}>
                 {"Day: " + forecast.Day.IconPhrase}
                 <img

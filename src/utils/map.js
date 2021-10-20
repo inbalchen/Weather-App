@@ -15,11 +15,12 @@ export const Days = {
 
 
 export const dayIcons = (condition) => {
-    if(condition.toLowerCase().includes('rain')){
+    console.log(condition)
+    if(condition.toLowerCase().includes('rain') || condition.toLowerCase().includes('storm') | condition.toLowerCase().includes('shower')){
         return rain
     }else if(condition.toLowerCase().includes('part') || condition.toLowerCase().includes('most') || condition.toLowerCase().includes('inter')){
         return partlysun
-    }else if(condition.toLowerCase().includes('cloud')){
+    }else if(condition.toLowerCase().includes('cloud') || condition.toLowerCase().includes('drear')){
         return partlysun
     }else if(condition.toLowerCase().includes('sun')){
         return sun
@@ -27,13 +28,13 @@ export const dayIcons = (condition) => {
 }
 
 export const nightIcons = (condition) => {
-    if(condition.toLowerCase().includes('rain')){
+    if(condition.toLowerCase().includes('rain') || condition.toLowerCase().includes('shower')){
         return rain
     }else if(condition.toLowerCase().includes('part') || condition.toLowerCase().includes('most') || condition.toLowerCase().includes('inter')){
         return partlynight
     }else if(condition.toLowerCase().includes('clear')){
         return moon
-    }else if(condition.toLowerCase().includes('cloud')){
+    }else if(condition.toLowerCase().includes('cloud') || condition.toLowerCase().includes('drear')){
         return cloud
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AutoComplete from "../../components/auto-complete/AutoComplete";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +9,7 @@ import {
 } from "./SearchActions";
 import {
   CircularProgress,
-  Card,
   Typography,
-  Divider,
   Snackbar,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -19,24 +17,27 @@ import Alert from "@material-ui/lab/Alert";
 import errorIcon from "../../assets/images/sad.svg";
 import Conditions from "../../components/conditions/Conditions";
 import Forecasts from "../../components/forecasts/Forecasts";
+import { NavLink } from "react-router-dom";
+import { debounce } from "lodash";
+import '../../assets/styles/index.scss'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      padding: "10px",
-    },
+const useStyles = makeStyles((props) => ({
+  container: {
+    height: '100%',
+    display: "flex",
+    padding: "20px",
+    '@media (max-width: 768px)': {
+      flexWrap: 'wrap',
+      justifyContent: 'center'
+    }
   },
   autoComplete: {
     maxWidth: "400px",
-    margin: "auto",
     display: "table",
   },
   progress: {
     width: "20px !important",
     height: "20px !important",
-  },
-  cardWrapper: {
-    padding: "15px",
   },
   alert1: {
     justifyContent: "center",
@@ -47,6 +48,29 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "100px",
     margin: "20px 0 0 0",
   },
+  leftPane: {
+    padding: "10px",
+    background: '#fff',
+    borderRadius: '4px',
+    boxShadow: "0px 2px 1px -1px rgb(0, 0, 0, 0.2), 0px 1px 1px 0px rgb(0, 0, 0, 0.14), 0px 1px 3px 0px rgb(0, 0, 0, 0.12)",
+    maxHeight: "646px",
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    '@media (max-width: 768px)': {
+      marginBottom: '50px'
+    },
+    opacity: '0.7',
+    maxWidth: '315px'
+  },
+  favLink: {
+    color: 'rgba(0, 13, 129, 0.75)',
+    fontSize: "16px",
+    '&:hover': {
+      fontSize: "18px"
+    },
+    height: 25
+  }
 }));
 
 function Search() {
@@ -137,11 +161,11 @@ function Search() {
     }
   };
 
-  const handleChange = async (e) => {
+  const handleChange = useCallback(debounce(async (e) => {
     console.log(e.target.value);
     setDefaultCity(e.target.value);
     await dispatch(getCityLocation(e.target.value));
-  };
+  }, 500), []);
 
   const handleListItemClick = async (item, locationKey) => {
     setDefaultCity(item);
@@ -151,30 +175,15 @@ function Search() {
     await dispatch(getCityLocation(""));
     await dispatch(getCurrentConditions(locationKey));
   };
-  console.log(city)
+  
   return (
-    <div className={classes.root}>
-      <div className={classes.autoComplete}>
-        {city && city.error ? (
-          <Alert severity="error" className={classes.alert1}>
-            Service Unavailable
-            <img src={errorIcon} alt="Error" className={classes.alert1Img} />
-          </Alert>
-        ) : (
-          <AutoComplete
-            handleChange={handleChange}
-            defaultCity={defaultCity}
-            city={city}
-            handleListItemClick={handleListItemClick}
-          />
-        )}
-      </div>
-
+    <div className={`${conditions && conditions.length ? classes.container + " " + conditions[0].WeatherText.toLowerCase().replace(' ', '-') : classes.container}`}>
       {fetchingConditions ? (
         <div style={{ textAlign: "center", marginTop: "100px" }}>
           <CircularProgress />
         </div>
-      ) : conditions && conditions.error ? (
+      ) :
+      conditions && conditions.error ? (
         <div style={{ maxWidth: "600px", margin: "auto", textAlign: "center" }}>
           <Alert
             severity="error"
@@ -193,41 +202,57 @@ function Search() {
             />
           </Alert>
         </div>
+      ) : conditions && 
+      <div className={classes.leftPane}>
+        <div className={classes.autoComplete}>
+          {city && city.error ? (
+            <Alert severity="error" className={classes.alert1}>
+              Service Unavailable
+              <img src={errorIcon} alt="Error" className={classes.alert1Img} />
+            </Alert>
+          ) : (
+            <AutoComplete
+              handleChange={handleChange}
+              defaultCity={defaultCity}
+              city={city}
+              handleListItemClick={handleListItemClick}
+            />
+          )}
+        </div>
+        { 
+      
+        <Conditions
+          conditions={conditions}
+          chosenCity={chosenCity}
+          favorite={favorite}
+          toggleFavorite={toggleFavorite}
+          changeUnit={changeUnit}
+          unit={unit}
+        />
+      }
+
+      <NavLink exact className={classes.favLink} to="/favorites">
+        Favorites
+      </NavLink>
+      </div>
+    }
+
+
+    {fetchingForecasts ? (
+        <div style={{ textAlign: "center", marginTop: "100px" }}>
+          <CircularProgress />
+        </div>
+      ) : forecasts && forecasts.error ? (
+        <div>
+          <Alert severity="error">
+            Sorry! Could not find {chosenCity ? chosenCity : ""}{" "}
+            forecasts
+          </Alert>
+        </div>
       ) : (
-        conditions && (
-          <div style={{ marginTop: "20px" }}>
-            <Card className={classes.cardWrapper}>
-              <Conditions
-                conditions={conditions}
-                chosenCity={chosenCity}
-                favorite={favorite}
-                toggleFavorite={toggleFavorite}
-                changeUnit={changeUnit}
-                unit={unit}
-              />
-
-              <Divider style={{ marginTop: "8px" }} />
-
-              {fetchingForecasts ? (
-                <div style={{ textAlign: "center", marginTop: "100px" }}>
-                  <CircularProgress />
-                </div>
-              ) : forecasts && forecasts.error ? (
-                <div style={{ marginTop: "15px" }}>
-                  <Alert severity="error">
-                    Sorry! Could not find {chosenCity ? chosenCity : ""}{" "}
-                    forecasts
-                  </Alert>
-                </div>
-              ) : (
-                forecasts &&
-                forecasts.data &&
-                forecasts.data.DailyForecasts && (
-                  <Forecasts forecasts={forecasts} />
-                )
-              )}
-            </Card>
-          </div>
+        forecasts &&
+        forecasts.DailyForecasts && (
+          <Forecasts forecasts={forecasts} />
         )
       )}
 
