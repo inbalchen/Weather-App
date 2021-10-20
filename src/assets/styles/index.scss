@@ -9,6 +9,10 @@
     font-family: Mon-Reg;
 }
 
+#root {
+    min-height: 100%;
+}
+
 a {
     text-decoration: none;
     transition: 0.5s;
