@@ -23,7 +23,7 @@ import '../../assets/styles/index.scss'
 
 const useStyles = makeStyles((props) => ({
   container: {
-    height: '100%',
+    minHeight: '100%',
     display: "flex",
     padding: "20px",
     '@media (max-width: 768px)': {
