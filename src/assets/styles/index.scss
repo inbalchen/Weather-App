@@ -1,0 +1,58 @@
+@font-face {
+    font-family: Mon-Reg;
+    src: url(../fonts/Montserrat-Regular.woff2);
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: Mon-Reg;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.clear {
+    background: url(../images/bg/clear.jpg);
+    background-size: cover;
+}
+
+.sunny {
+    background: url(../images/bg/sunny.jpg);
+    background-size: cover;
+}
+
+.mostly-sunny {
+    background: url(../images/bg/partly-sunny.jpg);
+    background-size: cover;
+}
+
+.cloudy {
+    background: url(../images/bg/some-clouds.jpg);
+    background-size: cover;
+}
+
+.some-clouds {
+    background: url(../images/bg/some-clouds.jpg);
+    background-size: cover;
+}
+
+.a-shower {
+    background: url(../images/bg/sunny-bg.jpg);
+    background-size: cover;
+}
+
+.partly-sunny {
+    background: url(../images/bg/partly-sunny.jpg);
+    background-size: cover;
+}
+
+.card-header-anim span {
+    transition: 0.3s;
+}
+
+.card-header-anim:hover span {
+    font-size: 1.6rem;
+}
