@@ -60,7 +60,6 @@ const useStyles = makeStyles((props) => ({
     '@media (max-width: 768px)': {
       marginBottom: '50px'
     },
-    opacity: '0.7',
     maxWidth: '315px'
   },
   favLink: {
@@ -69,7 +68,8 @@ const useStyles = makeStyles((props) => ({
     '&:hover': {
       fontSize: "18px"
     },
-    height: 25
+    height: 25,
+    alignSelf: 'center'
   }
 }));
 
@@ -177,13 +177,13 @@ function Search() {
   };
 
   return (
-    <div className={`${conditions && conditions.length ? classes.container + " " + conditions[0].WeatherText.toLowerCase().replace(' ', '-') : classes.container}`}>
+    <div className={`${conditions?.length ? classes.container + " " + conditions[0].WeatherText.toLowerCase().replace(' ', '-') : classes.container}`}>
       {fetchingConditions ? (
         <div style={{ textAlign: "center", marginTop: "100px" }}>
           <CircularProgress />
         </div>
       ) :
-      conditions && conditions.error ? (
+      conditions?.error ? (
         <div style={{ maxWidth: "600px", margin: "auto", textAlign: "center" }}>
           <Alert
             severity="error"
@@ -242,7 +242,7 @@ function Search() {
         <div style={{ textAlign: "center", marginTop: "100px" }}>
           <CircularProgress />
         </div>
-      ) : forecasts && forecasts.error ? (
+      ) : forecasts?.error ? (
         <div>
           <Alert severity="error">
             Sorry! Could not find {chosenCity ? chosenCity : ""}{" "}
@@ -250,8 +250,7 @@ function Search() {
           </Alert>
         </div>
       ) : (
-        forecasts &&
-        forecasts.DailyForecasts && (
+        forecasts?.DailyForecasts && (
           <Forecasts forecasts={forecasts} />
         )
       )}
